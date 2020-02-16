@@ -1,0 +1,13 @@
+CTRL-A  - the screen code
+
+S   - horizontal split
+|   - vertical split
+A   - rename
+"   - list windows
+c   - open new
+d   - detach session
+Q   - close all others
+X   - close current
+
+a   - toggle with prev
+tab - next region

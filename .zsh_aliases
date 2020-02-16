@@ -1,0 +1,52 @@
+# general aliases
+alias     c='clear'
+alias     s='screen'
+alias    fg='fg &>/dev/null'
+alias   lsd='ls -hAlt --color=auto'
+alias    py='python3'
+alias    mk='make -j 4'
+alias    hs='c && cat ~/.screenhelp'
+alias cprof='curl -s -o /dev/null -w "time_namelookup:  %{time_namelookup}s\n time_connect:  %{time_connect}s\n time_appconnect:  %{time_appconnect}s\n time_pretransfer:  %{time_pretransfer}s\n time_redirect:  %{time_redirect}s\n time_starttransfer:  %{time_starttransfer}s\n ----------\n time_total:  %{time_total}s\n"'
+
+# git
+alias     g='git'
+alias    ga='g add .'
+alias    gp='g push'
+alias    gs='g status'
+alias    gl='g log --oneline'
+alias	gpu='g pull'
+alias   gcm='g commit -m'
+alias	grb='g rebase -i master'
+alias   gdf='g difftool --tool=vimdiff --no-prompt'
+alias   gcd='cd $(g rev-parse --show-toplevel)'
+
+# vim and files
+alias     v='vim'
+alias   vrc='v ~/.vimrc'
+alias    vz='v -p ~/.zsh_aliases ~/.zshrc'
+alias    sz='source ~/.zshrc'
+
+# functions
+
+# split a variable on the ':' delimiter
+function pp() {
+    tr ':' '\n' <<< $(printenv $1)
+}
+
+# convert string to list, save in $ret
+function str_to_list() {
+    ret=($(echo "$1" | tr '\n' ' '))
+}
+
+DEFAULT_ORG='timmysilv'
+SRC_ROOT="$HOME/src/github.com"
+
+# clone and organize repos, specify ORG as env-var if not the default
+function gclone() {
+    ORG=${ORG:-$DEFAULT_ORG}
+    DIR=$SRC_ROOT/$ORG
+    mkdir -p $DIR
+    cd $DIR
+    git clone https://github.com/$ORG/$1.git
+    cd $1
+}
