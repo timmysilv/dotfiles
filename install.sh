@@ -29,5 +29,12 @@ PWD=$(pwd)
 mv $PWD/.git $PWD/git
 cp $PWD/.* ~/
 echo "source ~/.zsh_aliases" >> ~/.zshrc
+cat >> ~/.zshrc << EOM
+if [[ -z $WAS_SOURCED ]]; then
+    source ~/.zsh_aliases
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    WAS_SOURCED=1
+fi
+EOM
 source ~/.zshrc
 mv $PWD/git $PWD/.git

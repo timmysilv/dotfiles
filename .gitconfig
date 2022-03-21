@@ -4,3 +4,10 @@
 	name = Matthew Silverman
 	email = ma.silv11@gmail.com
 	username = timmysilv
+[pull]
+	rebase = false
+[alias]
+	open-pr = "!f() { git push origin -u $(git branch --show-current); open \"$(git ls-remote --get-url $(git config --get branch.$(git branch --show-current).remote) | sed 's|git@github.com:\\(.*\\)$|https://github.com/\\1|' | sed 's|\\.git$||')/compare/$(git config --get branch.$(git branch --show-current).merge | cut -d / -f 3-)?expand=1\"; }; f"
+    amend = "git commit --amend --no-edit"
+[core]
+	pager = 
