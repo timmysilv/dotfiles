@@ -15,9 +15,11 @@ alias cprof='curl -s -o /dev/null -w "time_namelookup:  %{time_namelookup}s\n ti
 # git
 alias     g='git'
 alias    ga='g add .'
+alias    gb='g branch'
 alias    gp='g push'
 alias    gs='g status'
 alias    gl='g log --oneline -n 30'
+alias    gd='g diff'
 alias   gcm='g commit -m'
 alias	gpu='g pull'
 alias	grb='g rebase -i `git_main_branch`'
@@ -62,3 +64,19 @@ function scd() {
     ORG=${ORG:-$DEFAULT_ORG}
     cd $SRC_ROOT/$ORG/$1
 }
+
+function _scd_complete() {
+    local ls_result=$(ls ${SRC_ROOT}/${ORG:-$DEFAULT_ORG})
+    local latest=${COMP_WORDS[COMP_CWORD]}
+
+    COMPREPLY=()
+    for i in $ls_result; do
+        if [[ $i == ${latest}* ]]; then
+            COMPREPLY+=($i)
+        fi
+    done
+    if [[ ${#COMPREPLY[@]} -eq 0 ]]; then
+        COMPREPLY=($ls_result)
+    fi
+}
+complete -F _scd_complete scd
