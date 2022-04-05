@@ -56,17 +56,30 @@ function gclone() {
     DIR=$SRC_ROOT/$ORG
     mkdir -p $DIR
     cd $DIR
-    git clone https://github.com/$ORG/$1.git
+    git clone git@github.com:$ORG/$1.git
     cd $1
+    unset ORG
 }
 
 function scd() {
-    ORG=${ORG:-$DEFAULT_ORG}
-    cd $SRC_ROOT/$ORG/$1
+    repo=$2
+    org=$DEFAULT_ORG
+    if [[ $repo == "" ]]; then
+        repo=$1
+    else
+        org=$1
+    fi
+    cd $SRC_ROOT/$org/$repo
 }
 
 function _scd_complete() {
-    local ls_result=$(ls ${SRC_ROOT}/${ORG:-$DEFAULT_ORG})
+    org=$DEFAULT_ORG
+    if [[ $COMP_CWORD -eq 2 ]]; then
+        org=${COMP_WORDS[1]}
+    elif [[ $COMP_CWORD -gt 2 ]]; then
+        return
+    fi
+    local ls_result=$(ls -p ${SRC_ROOT}/${org} | grep /$)
     local latest=${COMP_WORDS[COMP_CWORD]}
 
     COMPREPLY=()
