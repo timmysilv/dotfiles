@@ -3,7 +3,6 @@ SRC_ROOT="$HOME/src/github.com"
 
 # general aliases
 alias     k='kubectl'
-alias     g='git'
 alias     c='clear'
 alias     s='screen'
 alias    fg='fg &>/dev/null'
@@ -11,11 +10,27 @@ alias    py='python3'
 alias    mk='make -j 4'
 alias    hs='c && cat ~/.screenhelp'
 alias   lsd='ls -hAlt --color=auto'
-alias   gcd='cd $(g rev-parse --show-toplevel)'
 alias   drm='docker rm `docker ps -a -f status=exited -q`'
 alias  drmi='docker rmi `docker images -f dangling=true -q`'
 alias ports='sudo lsof -i -P | grep LISTEN | grep -E ":\d+"'
 alias cprof='curl -s -o /dev/null -w "time_namelookup:  %{time_namelookup}s\n time_connect:  %{time_connect}s\n time_appconnect:  %{time_appconnect}s\n time_pretransfer:  %{time_pretransfer}s\n time_redirect:  %{time_redirect}s\n time_starttransfer:  %{time_starttransfer}s\n ----------\n time_total:  %{time_total}s\n"'
+
+# git
+alias     g='git'
+alias    ga='g add .'
+alias    gb='g branch'
+alias    gp='g push'
+alias    gs='g status'
+alias    gl='g log --oneline -n 30'
+alias    gd='g diff'
+alias   gcm='g commit -m'
+alias	gpu='g pull'
+alias	grb='g rebase -i `git_main_branch`'
+alias   gdv='g difftool --tool=vimdiff --no-prompt'
+alias   gdf='g diff `git_main_branch` --name-status'
+alias   gco='g checkout'
+alias   gch='g checkout `git_main_branch`'
+alias   gcd='cd $(g rev-parse --show-toplevel)'
 
 # vim and files
 alias     v='vim'

@@ -9,19 +9,6 @@
 [alias]
 	open-pr = "!f() { git push origin -u $(git branch --show-current); open \"$(git ls-remote --get-url $(git config --get branch.$(git branch --show-current).remote) | sed 's|git@github.com:\\(.*\\)$|https://github.com/\\1|' | sed 's|\\.git$||')/compare/$(git config --get branch.$(git branch --show-current).merge | cut -d / -f 3-)?expand=1\"; }; f"
     amend = "commit --amend --no-edit"
-    a = "add ."
-    b = "branch"
-    d = "diff"
-    l = "log --oneline -n 30"
-    p = "push"
-    s = "status"
-    cm = "commit -m"
-    co = "checkout"
-    ch = "checkout `git_main_branch`"
-    dv = "difftool --tool=vimdiff --no-prompt"
-    df = "diff `git_main_branch` --name-only"
-    pu = "pull"
-    rb = "rebase -i `git_main_branch`"
 [core]
 	pager = 
 	excludesFile = ~/.gitignore
